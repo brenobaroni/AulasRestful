@@ -9,12 +9,12 @@ using RestWithAsp.NetUdemy.Model.Context;
 
 namespace RestWithAsp.NetUdemy.Repository.Implementattions
 {
-    public class PersonBusinessImplementattion : IPersonRepository
+    public class PersonRepositoryImplementattion : IPersonRepository
     {
 
         private MySqlContext _context;
 
-        public PersonBusinessImplementattion(MySqlContext context)
+        public PersonRepositoryImplementattion(MySqlContext context)
         {
             _context = context;
         }

@@ -5,7 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RestWithAsp.NetUdemy.Model.Context;
 using RestWithAsp.NetUdemy.Business;
-using RestWithAsp.NetUdemy.Business.Implementations;
+using RestWithAsp.NetUdemy.Business.Implementattions;
+using RestWithAsp.NetUdemy.Repository.Implementattions;
+using RestWithAsp.NetUdemy.Repository;
 
 namespace RestWithAsp.NetUdemy
 {
@@ -35,6 +37,7 @@ namespace RestWithAsp.NetUdemy
 
             //#Dependency Injection #Breno
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
+            services.AddScoped<IPersonRepository, PersonRepositoryImplementattion>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

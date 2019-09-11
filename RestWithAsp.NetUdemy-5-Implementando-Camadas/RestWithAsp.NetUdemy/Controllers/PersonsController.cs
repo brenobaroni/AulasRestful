@@ -28,7 +28,7 @@ namespace RestWithAsp.NetUdemy.Controllers
         }
 
         // GET api/values/5
-        [HttpGet("v1/{id}")]
+        [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             var person = _personBusiness.FindById(id);
@@ -37,7 +37,7 @@ namespace RestWithAsp.NetUdemy.Controllers
         }
 
         // POST api/values
-        [HttpPost("v1")]
+        [HttpPost]
         public IActionResult Post([FromBody] Person person)
         {
             if (person == null) return BadRequest();
@@ -46,7 +46,7 @@ namespace RestWithAsp.NetUdemy.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("v1/{id}")]
+        [HttpPut("{id}")]
         public IActionResult Put([FromBody] Person person)
         {
             if (person == null) return BadRequest();
@@ -55,7 +55,7 @@ namespace RestWithAsp.NetUdemy.Controllers
         }
 
         // DELETE api/values/5
-        [HttpDelete("v1/{id}")]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             _personBusiness.Delete(id);

@@ -8,7 +8,7 @@ using RestWithAsp.NetUdemy.Model;
 using RestWithAsp.NetUdemy.Model.Context;
 using RestWithAsp.NetUdemy.Repository;
 
-namespace RestWithAsp.NetUdemy.Business.Implementations
+namespace RestWithAsp.NetUdemy.Business.Implementattions
 {
     public class PersonBusinessImplementation : IPersonBusiness
     {
