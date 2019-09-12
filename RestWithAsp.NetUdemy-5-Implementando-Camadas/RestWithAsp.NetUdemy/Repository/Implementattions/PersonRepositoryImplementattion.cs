@@ -78,7 +78,8 @@ namespace RestWithAsp.NetUdemy.Repository.Implementattions
         // Método responsável por atualizar uma pessoa
         public Person Update(Person person)
         {
-            if (!Exists(person.Id)) return new Person();
+            //Caso não exista retonra nulo.
+            if (!Exists(person.Id)) return null;
 
             var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(person.Id));
 

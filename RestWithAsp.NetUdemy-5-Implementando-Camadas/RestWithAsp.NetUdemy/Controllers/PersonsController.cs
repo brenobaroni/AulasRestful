@@ -50,8 +50,9 @@ namespace RestWithAsp.NetUdemy.Controllers
         public IActionResult Put([FromBody] Person person)
         {
             if (person == null) return BadRequest();
-            return new ObjectResult(_personBusiness.Update(person));
-
+            Person updateperson = _personBusiness.Update(person);
+            if (updateperson == null) return NoContent();
+            return new ObjectResult(updateperson);
         }
 
         // DELETE api/values/5
