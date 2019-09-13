@@ -45,7 +45,7 @@ namespace RestWithAsp.NetUdemy
 
                     var evolve = new Evolve.Evolve(evolveConnection, msg => _logger.LogInformation(msg))
                     {
-                        Locations = new List<string> { "db/migration" },
+                        Locations = new List<string> { "db/migrations" },
                         IsEraseDisabled = true,
                     };
 
@@ -62,7 +62,7 @@ namespace RestWithAsp.NetUdemy
             services.AddMvc();
 
             //Dependency API Version
-            services.AddApiVersioning();
+            services.AddApiVersioning(option => option.ReportApiVersions = true);
 
             //#Dependency Injection #Breno
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
@@ -70,18 +70,11 @@ namespace RestWithAsp.NetUdemy
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHsts();
-            }
+            loggerFactory.AddConsole(_configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
 
-            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

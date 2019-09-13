@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="db\dataset\V1_0_4__Insert_data_in_books.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="db\dataset\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
