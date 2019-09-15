@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using MySqlX.XDevAPI;
 using System.Collections.Generic;
 using System;
+using RestWithAsp.NetUdemy.Repository.Generic;
 
 namespace RestWithAsp.NetUdemy
 {
@@ -64,9 +65,14 @@ namespace RestWithAsp.NetUdemy
             //Dependency API Version
             services.AddApiVersioning(option => option.ReportApiVersions = true);
 
-            //#Dependency Injection #Breno
+            //Dependency Injection #Breno
+            services.AddScoped<IBookBusiness, BookBusinessImplementation>();
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
             services.AddScoped<IPersonRepository, PersonRepositoryImplementattion>();
+
+            //Generic Dependency
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
