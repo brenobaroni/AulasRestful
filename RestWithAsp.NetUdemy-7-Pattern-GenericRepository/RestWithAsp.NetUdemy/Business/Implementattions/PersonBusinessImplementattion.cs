@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 using RestWithAsp.NetUdemy.Model;
 using RestWithAsp.NetUdemy.Model.Context;
 using RestWithAsp.NetUdemy.Repository;
+using RestWithAsp.NetUdemy.Repository.Generic;
 
 namespace RestWithAsp.NetUdemy.Business.Implementattions
 {
     public class PersonBusinessImplementation : IPersonBusiness
     {
 
-        private IPersonRepository _repository;
+        private IRepository<Person> _repository;
 
-        public PersonBusinessImplementation(IPersonRepository repository)
+        public PersonBusinessImplementation(IRepository<Person> repository)
         {
             _repository = repository;
         }
