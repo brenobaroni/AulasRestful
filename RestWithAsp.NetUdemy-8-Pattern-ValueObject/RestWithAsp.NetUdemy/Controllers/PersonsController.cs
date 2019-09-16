@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RestWithAsp.NetUdemy.Model;
 using RestWithAsp.NetUdemy.Business;
+using RestWithAsp.NetUdemy.Data.VO;
 
 namespace RestWithAsp.NetUdemy.Controllers
 {
@@ -38,7 +39,7 @@ namespace RestWithAsp.NetUdemy.Controllers
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody] Person person)
+        public IActionResult Post([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
             return new ObjectResult(_personBusiness.Create(person));
@@ -47,10 +48,10 @@ namespace RestWithAsp.NetUdemy.Controllers
 
         // PUT api/values/5
         [HttpPut]
-        public IActionResult Put([FromBody] Person person)
+        public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
-            Person updateperson = _personBusiness.Update(person);
+            PersonVO updateperson = _personBusiness.Update(person);
             if (updateperson == null) return NoContent();
             return new ObjectResult(updateperson);
         }

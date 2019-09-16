@@ -5,21 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RestWithAsp.NetUdemy.Model
+namespace RestWithAsp.NetUdemy.Data.VO
 {
-    [Table("persons")]
-    public class Person : BaseEntity
+    public class PersonVO
     {
-        [Column("FirstName")]
+        public long? Id { get; set; }
         public string FirstName { get; set; }
-
-        [Column("LastName")]
         public string LastName { get; set; }
-
-        [Column("Address")]
         public string Address { get; set; }
-
-        [Column("Gender")]
         public string Gender { get; set; }
     }
 }

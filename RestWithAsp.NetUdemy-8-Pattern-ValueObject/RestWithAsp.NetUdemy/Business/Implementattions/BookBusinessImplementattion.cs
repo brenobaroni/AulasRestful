@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using RestWithAsp.NetUdemy.Data.Converters;
+using RestWithAsp.NetUdemy.Data.VO;
 using RestWithAsp.NetUdemy.Model;
 using RestWithAsp.NetUdemy.Model.Context;
 using RestWithAsp.NetUdemy.Repository;
@@ -15,16 +17,20 @@ namespace RestWithAsp.NetUdemy.Business.Implementattions
     {
 
         private IRepository<Book> _repository;
+        private readonly BookConverter _converter;
 
         public BookBusinessImplementation(IRepository<Book> repository)
         {
             _repository = repository;
+            _converter = new BookConverter();
         }
 
 
-        public Book Create(Book book)
+        public BookVO Create(BookVO book)
         {
-            return _repository.Create(book);
+            var bookEntity = _converter.Parse(book);
+            bookEntity = _repository.Create(bookEntity);
+            return _converter.Parse(bookEntity);
         }
 
         public void Delete(long Id)
@@ -32,19 +38,26 @@ namespace RestWithAsp.NetUdemy.Business.Implementattions
             _repository.Delete(Id);
         }
 
-        public List<Book> FindAll()
+        public List<BookVO> FindAll()
         {
-            return _repository.FindAll();
+            return _converter.ParseList(_repository.FindAll());
         }
 
-        public Book FindById(long id)
+        public BookVO FindById(long id)
         {
-            return _repository.FindById(id);
+            return _converter.Parse(_repository.FindById(id));
         }
 
-        public Book Update(Book book)
+        public BookVO Update(BookVO book)
         {
-            return _repository.Update(book);
+            var bookEntity = _converter.Parse(book);
+            bookEntity = _repository.Update(bookEntity);
+            return _converter.Parse(bookEntity);
+        }
+
+        public bool Exists(long id)
+        {
+            return _repository.Exists(id);
         }
 
     }

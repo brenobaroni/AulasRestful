@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using RestWithAsp.NetUdemy.Data.Converters;
+using RestWithAsp.NetUdemy.Data.VO;
 using RestWithAsp.NetUdemy.Model;
-using RestWithAsp.NetUdemy.Model.Context;
-using RestWithAsp.NetUdemy.Repository;
 using RestWithAsp.NetUdemy.Repository.Generic;
 
 namespace RestWithAsp.NetUdemy.Business.Implementattions
@@ -15,22 +10,23 @@ namespace RestWithAsp.NetUdemy.Business.Implementattions
     {
 
         private IRepository<Person> _repository;
+        private readonly PersonConverter _converter;
 
         public PersonBusinessImplementation(IRepository<Person> repository)
         {
             _repository = repository;
+            _converter = new PersonConverter();
         }
-
-
 
         // Metodo responsável por criar uma nova pessoa
         // Se tivéssemos um banco de dados esse seria o
         // momento de persistir os dados
-        public Person Create(Person person)
+        public PersonVO Create(PersonVO person)
         {
-            return _repository.Create(person);
+            var personEntity = _converter.Parse(person);
+            personEntity = _repository.Create(personEntity);
+            return _converter.Parse(personEntity);
         }
-
 
         // Método responsável por deletar
         // uma pessoa a partir de um ID
@@ -40,22 +36,28 @@ namespace RestWithAsp.NetUdemy.Business.Implementattions
         }
 
         // Método responsável por retornar todas as pessoas
-        public List<Person> FindAll()
+        public List<PersonVO> FindAll()
         {
-            return _repository.FindAll();
+            return _converter.ParseList(_repository.FindAll());
         }
 
-
         // Método responsável por retornar uma pessoa
-        public Person FindById(long id)
+        public PersonVO FindById(long id)
         {
-            return _repository.FindById(id);
+            return _converter.Parse(_repository.FindById(id));
         }
 
         // Método responsável por atualizar uma pessoa
-        public Person Update(Person person)
+        public PersonVO Update(PersonVO person)
         {
-            return _repository.Update(person);
+            var personEntity = _converter.Parse(person);
+            personEntity = _repository.Update(personEntity);
+            return _converter.Parse(personEntity);
+        }
+
+        public bool Exists(long id)
+        {
+            return _repository.Exists(id);
         }
 
     }
