@@ -13,6 +13,7 @@ using MySqlX.XDevAPI;
 using System.Collections.Generic;
 using System;
 using RestWithAsp.NetUdemy.Repository.Generic;
+using Microsoft.Net.Http.Headers;
 
 namespace RestWithAsp.NetUdemy
 {
@@ -60,7 +61,12 @@ namespace RestWithAsp.NetUdemy
                 }
             }
 
-            services.AddMvc();
+            services.AddMvc(options => 
+            {
+                options.RespectBrowserAcceptHeader = true;
+                options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("text/xml"));
+                options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/json"));
+            }).AddXmlSerializerFormatters();
 
             //Dependency API Version
             services.AddApiVersioning(option => option.ReportApiVersions = true);
