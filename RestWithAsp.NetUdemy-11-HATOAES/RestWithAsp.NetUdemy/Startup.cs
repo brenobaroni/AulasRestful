@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using RestWithAsp.NetUdemy.Model.Context;
 using RestWithAsp.NetUdemy.Business;
 using RestWithAsp.NetUdemy.Business.Implementattions;
@@ -14,7 +12,6 @@ using System.Collections.Generic;
 using System;
 using RestWithAsp.NetUdemy.Repository.Generic;
 using Microsoft.Net.Http.Headers;
-using Tapioca.HATEOAS;
 using RestWithAsp.NetUdemy.Hypermedia;
 
 namespace RestWithAsp.NetUdemy
@@ -70,6 +67,17 @@ namespace RestWithAsp.NetUdemy
                 options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/json"));
             }).AddXmlSerializerFormatters();
 
+            services.AddSwaggerGen(c =>
+            {
+            c.SwaggerDoc("v1", new Info
+                {
+                    Tittle = "RESTful API With ASP.NET Core 2.0",
+                    Version = "v1"
+                });
+            });
+
+                
+
             //Dependency API Version
             services.AddApiVersioning(option => option.ReportApiVersions = true);
 
@@ -86,7 +94,7 @@ namespace RestWithAsp.NetUdemy
             filterOptions.ObjectContentResponseEnricherList.Add(new PersonEnricher());
             services.AddSingleton(filterOptions);
 
-
+            
 
 
 

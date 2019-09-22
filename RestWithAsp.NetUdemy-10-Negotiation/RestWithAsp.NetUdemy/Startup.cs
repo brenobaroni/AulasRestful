@@ -61,6 +61,8 @@ namespace RestWithAsp.NetUdemy
                 }
             }
 
+            
+
             services.AddMvc(options => 
             {
                 options.RespectBrowserAcceptHeader = true;
