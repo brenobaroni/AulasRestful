@@ -16,6 +16,8 @@ using RestWithAsp.NetUdemy.Repository.Generic;
 using Microsoft.Net.Http.Headers;
 using Tapioca.HATEOAS;
 using RestWithAsp.NetUdemy.Hypermedia;
+using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace RestWithAsp.NetUdemy
 {
@@ -63,7 +65,7 @@ namespace RestWithAsp.NetUdemy
                 }
             }
 
-            services.AddMvc(options => 
+            services.AddMvc(options =>
             {
                 options.RespectBrowserAcceptHeader = true;
                 options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("text/xml"));
@@ -86,6 +88,11 @@ namespace RestWithAsp.NetUdemy
             filterOptions.ObjectContentResponseEnricherList.Add(new PersonEnricher());
             services.AddSingleton(filterOptions);
 
+            //Swagger
+            services.AddSwaggerGen(c =>
+           {
+               c.SwaggerDoc("v1", new Info { Title = "RESTful API With ASP.NET Core 2.0", Version = "v1" });
+           });
 
 
         }
@@ -95,6 +102,17 @@ namespace RestWithAsp.NetUdemy
         {
             loggerFactory.AddConsole(_configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+           {
+               c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+           });
+
+            var option = new RewriteOptions();
+            option.AddRedirect("^$", "swagger");
+            app.UseRewriter(option);
 
             app.UseMvc(routes =>
             {
