@@ -7,6 +7,7 @@ using RestWithAsp.NetUdemy.Model;
 using RestWithAsp.NetUdemy.Business;
 using RestWithAsp.NetUdemy.Data.VO;
 using Tapioca.HATEOAS;
+using Swashbuckle.Swagger.Annotations;
 
 namespace RestWithAsp.NetUdemy.Controllers
 {
@@ -24,6 +25,10 @@ namespace RestWithAsp.NetUdemy.Controllers
 
         // GET api/values
         [HttpGet]
+        [SwaggerResponse((200), Type = typeof(List<PersonVO>))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
@@ -32,6 +37,10 @@ namespace RestWithAsp.NetUdemy.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
+        [SwaggerResponse((200), Type = typeof(PersonVO))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(int id)
         {
@@ -42,6 +51,9 @@ namespace RestWithAsp.NetUdemy.Controllers
 
         // POST api/values
         [HttpPost]
+        [SwaggerResponse((201), Type = typeof(PersonVO))]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] PersonVO person)
         {
@@ -52,6 +64,9 @@ namespace RestWithAsp.NetUdemy.Controllers
 
         // PUT api/values/5
         [HttpPut]
+        [SwaggerResponse((202), Type = typeof(PersonVO))]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] PersonVO person)
         {
@@ -63,6 +78,9 @@ namespace RestWithAsp.NetUdemy.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Delete(int id)
         {
