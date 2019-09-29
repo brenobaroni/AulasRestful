@@ -1,15 +1,11 @@
-﻿using RestWithAsp.NetUdemy.Model;
-using System;
+﻿
+using RestWithAsp.NetUdemy.Model;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace RestWithAsp.NetUdemy.Repository
+namespace RestWithASPNETUdemy.Business
 {
     public interface IUserRepository
     {
         User FindByLogin(string login);
-
-
     }
 }

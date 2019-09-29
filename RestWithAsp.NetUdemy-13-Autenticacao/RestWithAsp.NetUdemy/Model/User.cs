@@ -7,6 +7,6 @@
     {
         public long? Id { get; set; }
         public string Login { get; set; }
-        public int AccessKey { get; set; }
+        public string AccessKey { get; set; }
     }
 }

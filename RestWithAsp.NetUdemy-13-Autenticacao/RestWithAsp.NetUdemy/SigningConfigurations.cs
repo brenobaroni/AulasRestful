@@ -1,13 +1,21 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using System.Security.Cryptography;
 
-namespace RestWithAsp.NetUdemy
+namespace RestWithASPNETUdemy.Security.Configuration
 {
-    internal class SigningConfigurations
+    public class SigningConfigurations
     {
+        public SecurityKey Key { get; }
+        public SigningCredentials SigningCredentials { get; }
+
         public SigningConfigurations()
         {
-        }
+            using (var provider = new RSACryptoServiceProvider(2048))
+            {
+                Key = new RsaSecurityKey(provider.ExportParameters(true));
+            }
 
-        public SecurityKey Key { get; internal set; }
+            SigningCredentials = new SigningCredentials(Key, SecurityAlgorithms.RsaSha256Signature);
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Tapioca.HATEOAS;
 
 namespace RestWithAsp.NetUdemy.Data.VO

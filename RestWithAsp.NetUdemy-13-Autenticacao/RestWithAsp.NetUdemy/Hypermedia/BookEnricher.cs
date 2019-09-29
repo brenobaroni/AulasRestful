@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using RestWithAsp.NetUdemy.Data.VO;
-using System.Threading.Tasks;
 using Tapioca.HATEOAS;
 
 namespace RestWithAsp.NetUdemy.Hypermedia
 {
-    public class PersonEnricher : ObjectContentResponseEnricher<PersonVO>
+    public class BookEnricher : ObjectContentResponseEnricher<BookVO>
     {
-        protected override Task EnrichModel(PersonVO content, IUrlHelper urlHelper)
+        protected override Task EnrichModel(BookVO content, IUrlHelper urlHelper)
         {
-            var path = "api/persons/v1";
+            var path = "api/books/v1";
             var url = new { controller = path, id = content.Id };
 
             content.Links.Add(new HyperMediaLink()
@@ -41,10 +41,12 @@ namespace RestWithAsp.NetUdemy.Hypermedia
                 Action = HttpActionVerb.DELETE,
                 Href = urlHelper.Link("DefaultApi", url),
                 Rel = RelationType.self,
-                Type = "int" 
+                Type = "int"
             });
 
+
             return null;
+
 
         }
     }

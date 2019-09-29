@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using RestWithAsp.NetUdemy.Model;
 using RestWithAsp.NetUdemy.Business;
 using RestWithAsp.NetUdemy.Data.VO;
 using Tapioca.HATEOAS;
 using Swashbuckle.Swagger.Annotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RestWithAsp.NetUdemy.Controllers
 {
@@ -30,6 +27,7 @@ namespace RestWithAsp.NetUdemy.Controllers
         [SwaggerResponse(400)]
         [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
+        [Authorize("Bearer")]
         public IActionResult Get()
         {
             return Ok(_personBusiness.FindAll());
@@ -42,6 +40,7 @@ namespace RestWithAsp.NetUdemy.Controllers
         [SwaggerResponse(400)]
         [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
+        [Authorize("Bearer")]
         public IActionResult Get(int id)
         {
             var person = _personBusiness.FindById(id);
@@ -55,6 +54,7 @@ namespace RestWithAsp.NetUdemy.Controllers
         [SwaggerResponse(400)]
         [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
+        [Authorize("Bearer")]
         public IActionResult Post([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
@@ -68,6 +68,7 @@ namespace RestWithAsp.NetUdemy.Controllers
         [SwaggerResponse(400)]
         [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
+        [Authorize("Bearer")]
         public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
@@ -82,6 +83,7 @@ namespace RestWithAsp.NetUdemy.Controllers
         [SwaggerResponse(400)]
         [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
+        [Authorize("Bearer")]
         public IActionResult Delete(int id)
         {
             _personBusiness.Delete(id);

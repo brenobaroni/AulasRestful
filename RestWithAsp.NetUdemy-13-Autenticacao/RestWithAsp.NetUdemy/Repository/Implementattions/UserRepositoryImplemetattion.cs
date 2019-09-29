@@ -6,15 +6,16 @@ using System.Threading;
 using System.Threading.Tasks;
 using RestWithAsp.NetUdemy.Model;
 using RestWithAsp.NetUdemy.Model.Context;
+using RestWithASPNETUdemy.Business;
 
 namespace RestWithAsp.NetUdemy.Repository.Implementattions
 {
-    public class UserRepositoryImplemetation : IUserRepository
+    public class UserRepositoryImplemetattion : IUserRepository
     {
 
         private MySqlContext _context;
 
-        public UserRepositoryImplemetation(MySqlContext context)
+        public UserRepositoryImplemetattion(MySqlContext context)
         {
             _context = context;
         }

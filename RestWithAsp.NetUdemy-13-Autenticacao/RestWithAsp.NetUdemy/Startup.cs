@@ -1,33 +1,36 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
+
+using Swashbuckle.AspNetCore.Swagger;
+
+using Tapioca.HATEOAS;
+using RestWithASPNETUdemy.Security.Configuration;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using RestWithAsp.NetUdemy.Model.Context;
+using RestWithAsp.NetUdemy.Security.Configuration;
 using RestWithAsp.NetUdemy.Business;
 using RestWithAsp.NetUdemy.Business.Implementattions;
 using RestWithAsp.NetUdemy.Repository.Implementattions;
-using RestWithAsp.NetUdemy.Repository;
-using Microsoft.Extensions.Logging;
-using MySqlX.XDevAPI;
-using System.Collections.Generic;
-using System;
 using RestWithAsp.NetUdemy.Repository.Generic;
-using Microsoft.Net.Http.Headers;
-using Tapioca.HATEOAS;
 using RestWithAsp.NetUdemy.Hypermedia;
-using Swashbuckle.AspNetCore.Swagger;
-using Microsoft.AspNetCore.Rewrite;
-using Microsoft.Extensions.Options;
-using RestWithAsp.NetUdemy.Security.Configuration;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
+using RestWithASPNETUdemy.Business;
+using RestWithASPNETUdemy.Business.Implementattions;
 
-namespace RestWithAsp.NetUdemy
+namespace RestWithASPNETUdemy
 {
     public class Startup
     {
-
         private readonly ILogger _logger;
         public IConfiguration _configuration { get; }
         public IHostingEnvironment _environment { get; }
@@ -39,15 +42,17 @@ namespace RestWithAsp.NetUdemy
             _logger = logger;
         }
 
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Connection to database
             var connectionString = _configuration["MySqlConnection:MySqlConnectionString"];
-
-            //Dependency
             services.AddDbContext<MySqlContext>(options => options.UseMySQL(connectionString));
 
-            //Login Dependency
+            //Adding Migrations Support
+            ExecuteMigrations(connectionString);
+
             var signingConfigurations = new SigningConfigurations();
             services.AddSingleton(signingConfigurations);
 
@@ -93,42 +98,50 @@ namespace RestWithAsp.NetUdemy
                     .RequireAuthenticatedUser().Build());
             });
 
-
-            //Migration
-            ExecuteMigration(connectionString);
-
+            //Content negociation - Support to XML and JSON
             services.AddMvc(options =>
             {
                 options.RespectBrowserAcceptHeader = true;
                 options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("text/xml"));
-                options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/json"));
-            }).AddXmlSerializerFormatters();
+                options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
 
-            //Dependency API Version
-            services.AddApiVersioning(option => option.ReportApiVersions = true);
+            })
+            .AddXmlSerializerFormatters();
 
-            //Dependency Injection #Breno
-            services.AddScoped<IBookBusiness, BookBusinessImplementation>();
-            services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
-
-            //Generic Dependency
-            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
-
-            //HATOAES Dependency
+            //HATEOAS filter definitions
             var filterOptions = new HyperMediaFilterOptions();
+            filterOptions.ObjectContentResponseEnricherList.Add(new BookEnricher());
             filterOptions.ObjectContentResponseEnricherList.Add(new PersonEnricher());
+
+            //Service inject
             services.AddSingleton(filterOptions);
 
-            //Swagger
+            //Versioning
+            services.AddApiVersioning(option => option.ReportApiVersions = true);
+
+            //Add Swagger Service
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "RESTful API With ASP.NET Core 2.0", Version = "v1" });
+                c.SwaggerDoc("v1",
+                    new Info
+                    {
+                        Title = "RESTful API With ASP.NET Core 2.0",
+                        Version = "v1"
+                    });
+
             });
+            //Dependency Injection
+            services.AddScoped<IPersonBusiness, PersonBusinessImplementattion>();
+            services.AddScoped<IBookBusiness, BookBusinessImplementattion>();
+            services.AddScoped<ILoginBusiness, LoginBusinessImplementattion>();
 
+            services.AddScoped<IUserRepository, UserRepositoryImplemetattion>();
 
+            //Dependency Injection of GenericRepository
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
         }
 
-        private void ExecuteMigration(string connectionString)
+        private void ExecuteMigrations(string connectionString)
         {
             if (_environment.IsDevelopment())
             {
@@ -159,26 +172,26 @@ namespace RestWithAsp.NetUdemy
             loggerFactory.AddConsole(_configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            //Enable Swagger
             app.UseSwagger();
 
-            app.UseSwaggerUI(c =>
-           {
-               c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-           });
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
+            //Starting our API in Swagger page
             var option = new RewriteOptions();
             option.AddRedirect("^$", "swagger");
             app.UseRewriter(option);
 
+            //Adding map routing
             app.UseMvc(routes =>
             {
-                routes.MapRoute
-                    (
-                        name: "DefaultApi",
-                        template: "{controller=values}/{id?}"
-
-                    );
+                routes.MapRoute(
+                    name: "DefaultApi",
+                    template: "{controller=Values}/{id?}");
             });
+
         }
     }
 }

@@ -1,58 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
+﻿using RestWithASPNETUdemy.Model;
+using RestWithASPNETUdemy.Security.Configuration;
+using System;
 using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Principal;
-using RestWithAsp.NetUdemy.Data.Converters;
-using RestWithAsp.NetUdemy.Data.VO;
-using RestWithAsp.NetUdemy.Model;
-using RestWithAsp.NetUdemy.Repository;
-using RestWithAsp.NetUdemy.Repository.Generic;
 using RestWithAsp.NetUdemy.Security.Configuration;
 
-namespace RestWithAsp.NetUdemy.Business.Implementattions
+namespace RestWithASPNETUdemy.Business.Implementattions
 {
     public class LoginBusinessImplementattion : ILoginBusiness
     {
 
         private IUserRepository _repository;
-        private SigningConfiguration _signingConfiguration;
-        private TokenConfiguration _tokenConfiguration;
+        private SigningConfigurations _signingConfigurations;
+        private TokenConfiguration _tokenConfigurations;
 
-        public LoginBusinessImplementattion(IUserRepository repository, SigningConfiguration signingConfiguration, TokenConfiguration tokenConfiguration)
+
+        public LoginBusinessImplementattion(IUserRepository repository, SigningConfigurations signingConfigurations, TokenConfiguration tokenConfiguration)
         {
             _repository = repository;
-            _signingConfiguration = signingConfiguration;
-            _tokenConfiguration = tokenConfiguration;
+            _signingConfigurations = signingConfigurations;
+            _tokenConfigurations = tokenConfiguration;
         }
 
-        public object FindByLogin(User user)
+        public object FindByLogin(UserVO user)
         {
-            bool CredentialsIsValid = false;
-            if(user != null && !string.IsNullOrWhiteSpace(user.Login))
+            bool credentialsIsValid = false;
+            if (user != null && !string.IsNullOrWhiteSpace(user.Login))
             {
                 var baseUser = _repository.FindByLogin(user.Login);
-                CredentialsIsValid = (baseUser != null && user.Login == baseUser.Login && user.AccessKey == baseUser.AccessKey);
+                credentialsIsValid = (baseUser != null && user.Login == baseUser.Login && user.AccessKey == baseUser.AccessKey);
             }
-
-            if (CredentialsIsValid)
+            if (credentialsIsValid)
             {
                 ClaimsIdentity identity = new ClaimsIdentity(
-                    new GenericIdentity(user.Login, "Login")
-                    ,
-                    new[]
-                    {
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-                        new Claim(JwtRegisteredClaimNames.UniqueName, user.Login)
-                    }
-                    
+                    new GenericIdentity(user.Login, "Login"),
+                        new[]
+                        {
+                            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
+                            new Claim(JwtRegisteredClaimNames.UniqueName, user.Login)
+                        }
                     );
 
                 DateTime createDate = DateTime.Now;
-                DateTime expirationDate = createDate + TimeSpan.FromSeconds(_tokenConfiguration.Seconds);
+                DateTime expirationDate = createDate + TimeSpan.FromSeconds(_tokenConfigurations.Seconds);
+
                 var handler = new JwtSecurityTokenHandler();
                 string token = CreateToken(identity, createDate, expirationDate, handler);
-
 
                 return SuccessObject(createDate, expirationDate, token);
             }
@@ -64,12 +58,11 @@ namespace RestWithAsp.NetUdemy.Business.Implementattions
 
         private string CreateToken(ClaimsIdentity identity, DateTime createDate, DateTime expirationDate, JwtSecurityTokenHandler handler)
         {
-            var securityToken = handler.CreateToken(
-            new Microsoft.IdentityModel.Tokens.SecurityTokenDescriptor
+            var securityToken = handler.CreateToken(new Microsoft.IdentityModel.Tokens.SecurityTokenDescriptor
             {
-                Issuer = _tokenConfiguration.Issuer,
-                Audience = _tokenConfiguration.Audience,
-                SigningCredentials = _signingConfiguration.SigningCredentials,
+                Issuer = _tokenConfigurations.Issuer,
+                Audience = _tokenConfigurations.Audience,
+                SigningCredentials = _signingConfigurations.SigningCredentials,
                 Subject = identity,
                 NotBefore = createDate,
                 Expires = expirationDate
@@ -84,7 +77,7 @@ namespace RestWithAsp.NetUdemy.Business.Implementattions
             return new
             {
                 autenticated = false,
-                message = "Failed to authenticate"
+                message = "Failed to autheticate"
             };
         }
 
@@ -92,11 +85,11 @@ namespace RestWithAsp.NetUdemy.Business.Implementattions
         {
             return new
             {
-                autenticaded = true,
+                autenticated = true,
                 created = createDate.ToString("yyyy-MM-dd HH:mm:ss"),
                 expiration = expirationDate.ToString("yyyy-MM-dd HH:mm:ss"),
                 accessToken = token,
-                messsage = "OK"
+                message = "OK"
             };
         }
     }

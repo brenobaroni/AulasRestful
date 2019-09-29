@@ -1,5 +1,4 @@
 ﻿using RestWithAsp.NetUdemy.Model.Base;
-using RestWithAsp.NetUdemy.Model.Context;
 using System.Collections.Generic;
 
 namespace RestWithAsp.NetUdemy.Repository.Generic

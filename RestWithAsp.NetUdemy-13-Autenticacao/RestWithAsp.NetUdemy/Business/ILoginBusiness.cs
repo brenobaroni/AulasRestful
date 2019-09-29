@@ -1,9 +1,10 @@
-﻿using RestWithAsp.NetUdemy.Model;
+﻿
+using RestWithASPNETUdemy.Model;
 
-namespace RestWithAsp.NetUdemy.Business
+namespace RestWithASPNETUdemy.Business
 {
     public interface ILoginBusiness
     {
-        object FindByLogin(User user);
+        object FindByLogin(UserVO user);
     }
 }

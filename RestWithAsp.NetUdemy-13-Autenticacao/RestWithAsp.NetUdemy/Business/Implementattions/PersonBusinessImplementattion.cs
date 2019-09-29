@@ -6,13 +6,13 @@ using RestWithAsp.NetUdemy.Repository.Generic;
 
 namespace RestWithAsp.NetUdemy.Business.Implementattions
 {
-    public class PersonBusinessImplementation : IPersonBusiness
+    public class PersonBusinessImplementattion : IPersonBusiness
     {
 
         private IRepository<Person> _repository;
         private readonly PersonConverter _converter;
 
-        public PersonBusinessImplementation(IRepository<Person> repository)
+        public PersonBusinessImplementattion(IRepository<Person> repository)
         {
             _repository = repository;
             _converter = new PersonConverter();

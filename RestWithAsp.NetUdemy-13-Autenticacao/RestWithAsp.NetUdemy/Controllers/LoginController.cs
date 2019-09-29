@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using RestWithAsp.NetUdemy.Model;
-using RestWithAsp.NetUdemy.Business;
-using RestWithAsp.NetUdemy.Data.VO;
-using Tapioca.HATEOAS;
-using Swashbuckle.Swagger.Annotations;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using RestWithASPNETUdemy.Model;
+using RestWithASPNETUdemy.Business;
 
 namespace RestWithAsp.NetUdemy.Controllers
 {
@@ -28,7 +21,7 @@ namespace RestWithAsp.NetUdemy.Controllers
         // POST api/values
         [AllowAnonymous]
         [HttpPost]
-        public object Post([FromBody] User user)
+        public object Post([FromBody] UserVO user)
         {
             if (user == null) return BadRequest();
             return _loginBusiness.FindByLogin(user);

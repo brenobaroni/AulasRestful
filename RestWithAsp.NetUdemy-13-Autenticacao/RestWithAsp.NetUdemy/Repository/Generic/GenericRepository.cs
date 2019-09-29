@@ -4,7 +4,6 @@ using RestWithAsp.NetUdemy.Model.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace RestWithAsp.NetUdemy.Repository.Generic
 {
