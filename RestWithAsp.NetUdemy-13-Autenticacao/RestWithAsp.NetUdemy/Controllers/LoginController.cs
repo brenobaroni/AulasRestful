@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using RestWithASPNETUdemy.Model;
 using RestWithASPNETUdemy.Business;
 
-namespace RestWithAsp.NetUdemy.Controllers
+namespace RestWithAspNetUdemy.Controllers
 {
     [ApiVersion("1.0")]
     [Route("api/[controller]/v{version:apiVersion}")]

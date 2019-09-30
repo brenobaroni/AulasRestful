@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RestWithAsp.NetUdemy.Business;
-using RestWithAsp.NetUdemy.Data.VO;
+using RestWithAspNetUdemy.Business;
+using RestWithAspNetUdemy.Data.VO;
 using Swashbuckle.Swagger.Annotations;
 using System.Collections.Generic;
 using Tapioca.HATEOAS;

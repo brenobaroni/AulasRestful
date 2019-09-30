@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RestWithAsp.NetUdemy.Data.Converter
+namespace RestWithAspNetUdemy.Data.Converter
 {
     public interface IParser<O, D>
     {

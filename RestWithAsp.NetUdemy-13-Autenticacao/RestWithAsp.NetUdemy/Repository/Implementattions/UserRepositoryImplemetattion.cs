@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using RestWithAsp.NetUdemy.Model;
-using RestWithAsp.NetUdemy.Model.Context;
+using RestWithAspNetUdemy.Model;
+using RestWithAspNetUdemy.Model.Context;
 using RestWithASPNETUdemy.Business;
 
-namespace RestWithAsp.NetUdemy.Repository.Implementattions
+namespace RestWithAspNetUdemy.Repository.Implementattions
 {
     public class UserRepositoryImplemetattion : IUserRepository
     {

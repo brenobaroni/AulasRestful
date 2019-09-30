@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RestWithAsp.NetUdemy.Model.Base;
-using RestWithAsp.NetUdemy.Model.Context;
+using RestWithAspNetUdemy.Model.Base;
+using RestWithAspNetUdemy.Model.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RestWithAsp.NetUdemy.Repository.Generic
+namespace RestWithAspNetUdemy.Repository.Generic
 {
     // A implementação do repositório genérico
     // Recebe qualquer Tipo T que implemente IRepository de mesmo tipo

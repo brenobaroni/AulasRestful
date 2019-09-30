@@ -1,7 +1,7 @@
-﻿using RestWithAsp.NetUdemy.Model.Base;
+﻿using RestWithAspNetUdemy.Model.Base;
 using System.Collections.Generic;
 
-namespace RestWithAsp.NetUdemy.Repository.Generic
+namespace RestWithAspNetUdemy.Repository.Generic
 {
     public interface IRepository<T> where T : BaseEntity
     {

@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using RestWithAsp.NetUdemy.Data.VO;
+using RestWithAspNetUdemy.Data.VO;
 using Tapioca.HATEOAS;
 
-namespace RestWithAsp.NetUdemy.Hypermedia
+namespace RestWithAspNetUdemy.Hypermedia
 {
     public class BookEnricher : ObjectContentResponseEnricher<BookVO>
     {

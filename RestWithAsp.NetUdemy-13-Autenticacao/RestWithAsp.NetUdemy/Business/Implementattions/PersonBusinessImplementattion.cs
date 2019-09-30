@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using RestWithAsp.NetUdemy.Data.Converters;
-using RestWithAsp.NetUdemy.Data.VO;
-using RestWithAsp.NetUdemy.Model;
-using RestWithAsp.NetUdemy.Repository.Generic;
+using RestWithAspNetUdemy.Data.Converters;
+using RestWithAspNetUdemy.Data.VO;
+using RestWithAspNetUdemy.Model;
+using RestWithAspNetUdemy.Repository.Generic;
 
-namespace RestWithAsp.NetUdemy.Business.Implementattions
+namespace RestWithAspNetUdemy.Business.Implementattions
 {
     public class PersonBusinessImplementattion : IPersonBusiness
     {

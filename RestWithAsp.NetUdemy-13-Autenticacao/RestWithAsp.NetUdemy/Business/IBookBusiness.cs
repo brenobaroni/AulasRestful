@@ -1,7 +1,7 @@
-﻿using RestWithAsp.NetUdemy.Data.VO;
+﻿using RestWithAspNetUdemy.Data.VO;
 using System.Collections.Generic;
 
-namespace RestWithAsp.NetUdemy.Business
+namespace RestWithAspNetUdemy.Business
 {
     public interface IBookBusiness
     {

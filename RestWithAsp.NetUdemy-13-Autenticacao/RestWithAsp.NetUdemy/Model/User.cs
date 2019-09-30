@@ -1,4 +1,4 @@
-﻿namespace RestWithAsp.NetUdemy.Model
+﻿namespace RestWithAspNetUdemy.Model
 {
     // Contrato entre aributos
     // e a estrutura da tabela

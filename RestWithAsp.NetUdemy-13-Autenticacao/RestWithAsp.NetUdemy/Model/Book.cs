@@ -1,8 +1,8 @@
-﻿using RestWithAsp.NetUdemy.Model.Base;
+﻿using RestWithAspNetUdemy.Model.Base;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace RestWithAsp.NetUdemy.Model
+namespace RestWithAspNetUdemy.Model
 {
     [Table("books")]
     public class Book : BaseEntity

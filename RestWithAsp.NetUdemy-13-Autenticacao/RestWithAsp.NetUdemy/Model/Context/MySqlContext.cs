@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-namespace RestWithAsp.NetUdemy.Model.Context
+namespace RestWithAspNetUdemy.Model.Context
 {
     public class MySqlContext : DbContext
     {

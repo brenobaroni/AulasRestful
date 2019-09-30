@@ -1,4 +1,4 @@
-﻿namespace RestWithAsp.NetUdemy.Security.Configuration
+﻿namespace RestWithAspNetUdemy.Security.Configuration
 {
     public class TokenConfiguration
     {

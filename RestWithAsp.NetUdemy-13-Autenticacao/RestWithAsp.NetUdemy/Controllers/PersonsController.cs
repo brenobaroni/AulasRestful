@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using RestWithAsp.NetUdemy.Business;
-using RestWithAsp.NetUdemy.Data.VO;
+using RestWithAspNetUdemy.Business;
+using RestWithAspNetUdemy.Data.VO;
 using Tapioca.HATEOAS;
 using Swashbuckle.Swagger.Annotations;
 using Microsoft.AspNetCore.Authorization;
 
-namespace RestWithAsp.NetUdemy.Controllers
+namespace RestWithAspNetUdemy.Controllers
 {
     [ApiVersion("1.0")]
     [Route("api/[controller]/v{version:apiVersion}")]

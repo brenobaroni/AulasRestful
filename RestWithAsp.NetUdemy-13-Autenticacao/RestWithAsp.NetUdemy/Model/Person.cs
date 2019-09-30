@@ -1,11 +1,11 @@
-﻿using RestWithAsp.NetUdemy.Model.Base;
+﻿using RestWithAspNetUdemy.Model.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RestWithAsp.NetUdemy.Model
+namespace RestWithAspNetUdemy.Model
 {
     [Table("persons")]
     public class Person : BaseEntity

@@ -1,10 +1,10 @@
-﻿using RestWithAsp.NetUdemy.Data.Converter;
-using RestWithAsp.NetUdemy.Data.VO;
-using RestWithAsp.NetUdemy.Model;
+﻿using RestWithAspNetUdemy.Data.Converter;
+using RestWithAspNetUdemy.Data.VO;
+using RestWithAspNetUdemy.Model;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RestWithAsp.NetUdemy.Data.Converters
+namespace RestWithAspNetUdemy.Data.Converters
 {
     public class BookConverter : IParser<BookVO, Book>, IParser<Book, BookVO>
     {

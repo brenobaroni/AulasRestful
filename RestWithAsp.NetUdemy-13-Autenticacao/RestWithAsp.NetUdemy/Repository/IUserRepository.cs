@@ -1,5 +1,5 @@
 ﻿
-using RestWithAsp.NetUdemy.Model;
+using RestWithAspNetUdemy.Model;
 using System.Collections.Generic;
 
 namespace RestWithASPNETUdemy.Business

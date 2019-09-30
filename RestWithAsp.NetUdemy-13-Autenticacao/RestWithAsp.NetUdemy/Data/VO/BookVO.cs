@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Tapioca.HATEOAS;
 
-namespace RestWithAsp.NetUdemy.Data.VO
+namespace RestWithAspNetUdemy.Data.VO
 {
     public class BookVO : ISupportsHyperMedia
     {

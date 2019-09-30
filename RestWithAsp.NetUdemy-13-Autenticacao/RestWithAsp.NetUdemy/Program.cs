@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using RestWithASPNETUdemy;
 
-namespace RestWithAsp.NetUdemy
+namespace RestWithAspNetUdemy
 {
     public class Program
     {

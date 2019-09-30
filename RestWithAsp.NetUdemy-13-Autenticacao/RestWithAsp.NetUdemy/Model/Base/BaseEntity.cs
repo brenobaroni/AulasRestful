@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-namespace RestWithAsp.NetUdemy.Model.Base
+namespace RestWithAspNetUdemy.Model.Base
 {
     // Contrato entre aributos
     // e a estrutura da tabela

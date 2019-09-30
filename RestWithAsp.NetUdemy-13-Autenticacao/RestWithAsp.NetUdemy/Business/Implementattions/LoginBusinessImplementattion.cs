@@ -4,7 +4,7 @@ using System;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Principal;
-using RestWithAsp.NetUdemy.Security.Configuration;
+using RestWithAspNetUdemy.Security.Configuration;
 
 namespace RestWithASPNETUdemy.Business.Implementattions
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.Security.Cryptography;
 
-namespace RestWithAsp.NetUdemy.Security.Configuration
+namespace RestWithAspNetUdemy.Security.Configuration
 {
     public class SigningConfiguration
     {
