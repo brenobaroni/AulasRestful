@@ -134,11 +134,14 @@ namespace RestWithASPNETUdemy
             services.AddScoped<IPersonBusiness, PersonBusinessImplementattion>();
             services.AddScoped<IBookBusiness, BookBusinessImplementattion>();
             services.AddScoped<ILoginBusiness, LoginBusinessImplementattion>();
-
             services.AddScoped<IUserRepository, UserRepositoryImplemetattion>();
+            services.AddScoped<IPersonRepository, PersonRepositoryImplemetattion>();
 
             //Dependency Injection of GenericRepository
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+
+
+
         }
 
         private void ExecuteMigrations(string connectionString)

@@ -13,7 +13,7 @@ namespace RestWithAspNetUdemy.Repository.Generic
     public class GenericRepository<T> : IRepository<T> where T : BaseEntity
     {
 
-        private readonly MySqlContext _context;
+        protected readonly MySqlContext _context;
 
         // Declaração de um dataset genérico
         private DbSet<T> dataset;

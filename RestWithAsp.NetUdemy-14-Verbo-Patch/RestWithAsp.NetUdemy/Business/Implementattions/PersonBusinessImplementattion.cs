@@ -9,10 +9,10 @@ namespace RestWithAspNetUdemy.Business.Implementattions
     public class PersonBusinessImplementattion : IPersonBusiness
     {
 
-        private IRepository<Person> _repository;
+        private IPersonRepository _repository;
         private readonly PersonConverter _converter;
 
-        public PersonBusinessImplementattion(IRepository<Person> repository)
+        public PersonBusinessImplementattion(IPersonRepository repository)
         {
             _repository = repository;
             _converter = new PersonConverter();
@@ -60,5 +60,9 @@ namespace RestWithAspNetUdemy.Business.Implementattions
             return _repository.Exists(id);
         }
 
+        public List<PersonVO> FindByName(string fistName, string lastName)
+        {
+            return _converter.ParseList(_repository.FindByName(fistName, lastName));
+        }
     }
 }

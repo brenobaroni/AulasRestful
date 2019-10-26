@@ -33,6 +33,18 @@ namespace RestWithAspNetUdemy.Controllers
             return Ok(_personBusiness.FindAll());
         }
 
+        [HttpGet("find-by-name")]
+        [SwaggerResponse((200), Type = typeof(List<PersonVO>))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        [Authorize("Bearer")]
+        public IActionResult GetByName([FromQuery] string firstName, [FromQuery] string lastName)
+        {
+            return Ok(_personBusiness.FindByName(firstName, lastName));
+        }
+
         // GET api/values/5
         [HttpGet("{id}")]
         [SwaggerResponse((200), Type = typeof(PersonVO))]
