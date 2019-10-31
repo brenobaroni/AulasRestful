@@ -20,15 +20,15 @@ namespace RestWithAspNetUdemy.Repository.Implementattions
         {
             if (!string.IsNullOrEmpty(firstName) && !string.IsNullOrEmpty(lastName))
             {
-                return _context.Persons.Where(w => w.FirstName.Equals(firstName) && w.LastName.Equals(lastName)).ToList();
+                return _context.Persons.Where(w => w.FirstName.Contains(firstName) && w.LastName.Contains(lastName)).ToList();
             }
             else if (!string.IsNullOrEmpty(firstName) && string.IsNullOrEmpty(lastName))
             {
-                return _context.Persons.Where(w => w.FirstName.Equals(firstName)).ToList();
+                return _context.Persons.Where(w => w.FirstName.Contains(firstName)).ToList();
             }
             else if (string.IsNullOrEmpty(firstName) && !string.IsNullOrEmpty(lastName))
             {
-                return _context.Persons.Where(w => w.LastName.Equals(lastName)).ToList();
+                return _context.Persons.Where(w => w.LastName.Contains(lastName)).ToList();
             }
             else
             {

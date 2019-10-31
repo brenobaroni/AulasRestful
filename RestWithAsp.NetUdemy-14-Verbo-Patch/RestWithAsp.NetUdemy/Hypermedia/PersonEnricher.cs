@@ -19,7 +19,6 @@ namespace RestWithAspNetUdemy.Hypermedia
                 Rel = RelationType.self,
                 Type = ResponseTypeFormat.DefaultGet
             });
-
             content.Links.Add(new HyperMediaLink()
             {
                 Action = HttpActionVerb.POST,
@@ -27,7 +26,6 @@ namespace RestWithAspNetUdemy.Hypermedia
                 Rel = RelationType.self,
                 Type = ResponseTypeFormat.DefaultPost
             });
-
             content.Links.Add(new HyperMediaLink()
             {
                 Action = HttpActionVerb.PUT,
@@ -35,15 +33,13 @@ namespace RestWithAspNetUdemy.Hypermedia
                 Rel = RelationType.self,
                 Type = ResponseTypeFormat.DefaultPost
             });
-
             content.Links.Add(new HyperMediaLink()
             {
                 Action = HttpActionVerb.DELETE,
                 Href = urlHelper.Link("DefaultApi", url),
                 Rel = RelationType.self,
-                Type = "int" 
+                Type = "int"
             });
-
             return null;
 
         }

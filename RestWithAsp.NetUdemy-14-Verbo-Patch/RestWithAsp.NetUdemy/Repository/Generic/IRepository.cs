@@ -10,7 +10,8 @@ namespace RestWithAspNetUdemy.Repository.Generic
         List<T> FindAll();
         T Update(T item);
         void Delete(long Id);
-
         bool Exists(long? id);
+        List<T> FindWithPagedSearch(string query);
+        int GetCount(string query);
     }
 }

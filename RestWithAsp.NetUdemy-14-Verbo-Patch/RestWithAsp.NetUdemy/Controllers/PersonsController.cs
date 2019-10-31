@@ -45,6 +45,18 @@ namespace RestWithAspNetUdemy.Controllers
             return Ok(_personBusiness.FindByName(firstName, lastName));
         }
 
+        [HttpGet("find-with-paged-search/{sortDirectio}/{pageSize}/{page}")]
+        [SwaggerResponse((200), Type = typeof(List<PersonVO>))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        [Authorize("Bearer")]
+        public IActionResult GetPagedSearch([FromQuery] string name, string sortDirection, int pageSize, int page)
+        {
+            return Ok(_personBusiness.FindWithPagedSearch(name,  sortDirection,  pageSize, page));
+        }
+
         // GET api/values/5
         [HttpGet("{id}")]
         [SwaggerResponse((200), Type = typeof(PersonVO))]
