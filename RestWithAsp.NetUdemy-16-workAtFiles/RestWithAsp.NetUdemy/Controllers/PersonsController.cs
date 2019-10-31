@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using RestWithAspNetUdemy.Business;
 using RestWithAspNetUdemy.Data.VO;
 using Tapioca.HATEOAS;
-using Swashbuckle.Swagger.Annotations;
 using Microsoft.AspNetCore.Authorization;
+using Swashbuckle.Swagger.Annotations;
 
 namespace RestWithAspNetUdemy.Controllers
 {

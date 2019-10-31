@@ -130,10 +130,13 @@ namespace RestWithASPNETUdemy
                     });
 
             });
-            //Dependency Injection
+
+            //Dependency Injection --BB
             services.AddScoped<IPersonBusiness, PersonBusinessImplementattion>();
             services.AddScoped<IBookBusiness, BookBusinessImplementattion>();
             services.AddScoped<ILoginBusiness, LoginBusinessImplementattion>();
+            services.AddScoped<IFileBusiness, FileBusinessImplementattion>();
+
             services.AddScoped<IUserRepository, UserRepositoryImplemetattion>();
             services.AddScoped<IPersonRepository, PersonRepositoryImplemetattion>();
 
